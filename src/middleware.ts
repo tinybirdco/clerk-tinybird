@@ -4,7 +4,7 @@ import * as jose from 'jose'
 
 export default clerkMiddleware(async (auth) => {
   const authentication = await auth()
-  const { userId, sessionId, orgId, orgRole, orgPermissions } = authentication
+  const { userId, sessionId, orgPermissions } = authentication
 
   // If user is not authenticated, continue without modification
   if (!userId || !sessionId) {
