@@ -1,12 +1,13 @@
 'use client'
+
 import { SignInButton, SignOutButton, SignedIn, SignedOut } from '@clerk/nextjs'
 import { jwtDecode } from 'jwt-decode'
 import { Roboto_Mono } from 'next/font/google'
 import { useTinybirdToken } from './providers/TinybirdProvider'
 const robotoMono = Roboto_Mono({ subsets: ['latin'] })
 
-export default async function Home() {
-  const { token, orgName } = useTinybirdToken()
+export default function Home() {
+  const { token } = useTinybirdToken()
 
   let decodedToken = null
   try {
