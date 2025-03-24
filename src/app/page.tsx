@@ -1,18 +1,13 @@
+'use client'
 import { SignInButton, SignOutButton, SignedIn, SignedOut } from '@clerk/nextjs'
-import { headers } from 'next/headers'
 import { jwtDecode } from 'jwt-decode'
 import { Roboto_Mono } from 'next/font/google'
-import { auth } from '@clerk/nextjs/server'
-
+import { useTinybirdToken } from './providers/TinybirdProvider'
 const robotoMono = Roboto_Mono({ subsets: ['latin'] })
 
 export default async function Home() {
-  const headersList = await headers()
-  const token = headersList.get('x-tinybird-token') || ''
-  const orgName = headersList.get('x-org-name') || ''
-  const authentication = await auth()
-  const { userId, sessionId, orgId, orgRole, orgPermissions } = authentication
-  
+  const { token, orgName } = useTinybirdToken()
+
   let decodedToken = null
   try {
     decodedToken = token ? jwtDecode(token) : null
@@ -51,24 +46,6 @@ export default async function Home() {
 
         <SignedIn>
           <div className="space-y-6">
-            <div className="bg-[#151515] p-4 rounded">
-              <h2 className="font-semibold mb-2">Clerk User Info:</h2>
-              <pre className="bg-[#151515] p-2 rounded">
-{JSON.stringify({
-  userId,
-  sessionId,
-  orgName,
-  orgId,
-  orgRole,
-  orgPermissions,
-}, null, 2)}</pre>
-            </div>
-
-            <div className="bg-[#151515] p-4 rounded">
-              <h2 className="font-semibold mb-2">Organization permissions:</h2>
-              <pre className="bg-[#151515] p-2 rounded">{orgPermissions || 'No specific permissions'}</pre>
-            </div>
-
             <div className="bg-[#151515] p-4 rounded">
               <h2 className="font-semibold mb-2">Tinybird Token:</h2>
               <pre className="bg-[#151515] p-2 rounded overflow-x-auto">{token}</pre>
