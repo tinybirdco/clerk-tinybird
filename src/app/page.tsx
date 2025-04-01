@@ -1,6 +1,6 @@
 'use client'
 
-import { SignInButton, SignOutButton, SignedIn, SignedOut } from '@clerk/nextjs'
+import { SignInButton, SignOutButton, SignedIn, SignedOut, UserButton, OrganizationSwitcher } from '@clerk/nextjs'
 import { jwtDecode } from 'jwt-decode'
 import { Roboto_Mono } from 'next/font/google'
 import { useTinybirdToken } from './providers/TinybirdProvider'
@@ -23,17 +23,24 @@ export default function Home() {
           <h1 className="text-2xl font-bold">Multi-tenancy with Clerk + Tinybird JWT</h1>
           <SignedOut>
             <SignInButton mode="modal">
-              <button className="relative bg-[#27f795] hover:bg-[#27f795] text-black px-4 py-2 group">
+              <button className="relative bg-[#27f795] hover:bg-[#27f795] text-black px-4 py-2 group flex items-center gap-2">
+                <span>Sign In</span>
                 <span className="absolute left-[-5px] top-[-5px] h-2 w-2 border-l-2 border-t-2 border-transparent group-hover:border-[#27f795] transition-all duration-500 origin-top-left scale-0 group-hover:scale-100"></span>
                 <span className="absolute right-[-5px] top-[-5px] h-2 w-2 border-r-2 border-t-2 border-transparent group-hover:border-[#27f795] transition-all duration-500 origin-top-right scale-0 group-hover:scale-100"></span>
                 <span className="absolute left-[-5px] bottom-[-5px] h-2 w-2 border-l-2 border-b-2 border-transparent group-hover:border-[#27f795] transition-all duration-500 origin-bottom-left scale-0 group-hover:scale-100"></span>
                 <span className="absolute right-[-5px] bottom-[-5px] h-2 w-2 border-r-2 border-b-2 border-transparent group-hover:border-[#27f795] transition-all duration-500 origin-bottom-right scale-0 group-hover:scale-100"></span>
-                Sign In
               </button>
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <SignOutButton>
+            <OrganizationSwitcher 
+              appearance={{
+                elements: {
+                  organizationPreviewTextContainer: "text-white",
+                }
+              }}
+            />
+            {/* <SignOutButton>
               <button className="relative bg-[#27f795] hover:bg-[#27f795] text-black px-4 py-2 group">
                 <span className="absolute left-[-5px] top-[-5px] h-2 w-2 border-l-2 border-t-2 border-transparent group-hover:border-[#27f795] transition-all duration-500 origin-top-left scale-0 group-hover:scale-100"></span>
                 <span className="absolute right-[-5px] top-[-5px] h-2 w-2 border-r-2 border-t-2 border-transparent group-hover:border-[#27f795] transition-all duration-500 origin-top-right scale-0 group-hover:scale-100"></span>
@@ -41,7 +48,7 @@ export default function Home() {
                 <span className="absolute right-[-5px] bottom-[-5px] h-2 w-2 border-r-2 border-b-2 border-transparent group-hover:border-[#27f795] transition-all duration-500 origin-bottom-right scale-0 group-hover:scale-100"></span>
                 Sign Out
               </button>
-            </SignOutButton>
+            </SignOutButton> */}
           </SignedIn>
         </div>
 

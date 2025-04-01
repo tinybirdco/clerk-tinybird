@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 
 export default clerkMiddleware(async (auth) => {
   const authentication = await auth()
-  const { userId, sessionId, orgPermissions, getToken } = authentication
+  const { userId, sessionId, getToken } = authentication
 
   // If user is not authenticated, continue without modification
   if (!userId || !sessionId) {
@@ -13,15 +13,11 @@ export default clerkMiddleware(async (auth) => {
     return response
   }
 
-  const token = await getToken({ template: "tinybird-logs-explorer" })
-  console.log('token', token)
-
+  const token = await getToken({ template: "tinybird" })
 
   try {
-    const orgName = orgPermissions?.[0]?.split(':').pop() || ''
     const response = NextResponse.next()
     response.headers.set('x-tinybird-token', token || '')
-    response.headers.set('x-org-name', orgName)
     return response
   } catch (error) {
     console.error('Middleware error:', error)
