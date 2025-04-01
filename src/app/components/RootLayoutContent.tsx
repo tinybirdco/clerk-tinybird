@@ -6,15 +6,13 @@ import { useTinybirdToken } from '../providers/TinybirdProvider'
 interface RootLayoutContentProps {
   children: ReactNode
   initialToken: string
-  initialOrgName: string
 }
 
-export function RootLayoutContent({ children, initialToken, initialOrgName }: RootLayoutContentProps) {
-  const { setToken, setOrgName } = useTinybirdToken()
+export function RootLayoutContent({ children, initialToken }: RootLayoutContentProps) {
+  const { setToken } = useTinybirdToken()
 
   // Set the initial values from the server
   setToken(initialToken)
-  setOrgName(initialOrgName)
 
   return <>{children}</>
 } 

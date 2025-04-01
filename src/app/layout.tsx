@@ -14,14 +14,13 @@ export default async function RootLayout({
 }) {
   const headersList = await headers()
   const token = headersList.get('x-tinybird-token') || ''
-  const orgName = headersList.get('x-org-name') || ''
 
   return (
     <html lang="en">
       <body className={inter.className}>
         <ClerkProvider>
           <TinybirdProvider>
-            <RootLayoutContent initialToken={token} initialOrgName={orgName}>
+            <RootLayoutContent initialToken={token}>
               {children}
             </RootLayoutContent>
           </TinybirdProvider>
