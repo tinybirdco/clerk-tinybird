@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #0a0a0a;
+  --text-box-bg: #f5f5f5;
 }
 
 @theme inline {
@@ -16,6 +17,7 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ffffff;
+    --text-box-bg: #151515;
   }
 }
 

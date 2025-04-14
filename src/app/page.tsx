@@ -33,7 +33,7 @@ export default function Home() {
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <OrganizationSwitcher 
+            <OrganizationSwitcher
               appearance={{
                 elements: {
                   organizationPreviewTextContainer: "text-white",
@@ -54,13 +54,13 @@ export default function Home() {
 
         <SignedIn>
           <div className="space-y-6">
-            <div className="bg-[#151515] p-4 rounded">
+            <div className="bg-[var(--text-box-bg)] p-4 rounded">
               <h2 className="font-semibold mb-2">Tinybird Token:</h2>
               <pre className="bg-[#151515] p-2 rounded overflow-x-auto">{token}</pre>
             </div>
 
             {decodedToken && (
-              <div className="bg-[#151515] p-4 rounded">
+              <div className="bg-[var(--text-box-bg)] p-4 rounded">
                 <h2 className="font-semibold mb-2">Decoded Token:</h2>
                 <pre className="bg-[#151515] p-2 rounded overflow-x-auto">
                   {JSON.stringify(decodedToken, null, 2)}
@@ -68,10 +68,10 @@ export default function Home() {
               </div>
             )}
 
-            <div className="bg-[#151515] p-4 rounded">
+            <div className="bg-[var(--text-box-bg)] p-4 rounded">
               <h2 className="font-semibold mb-2">Example Tinybird Request:</h2>
               <pre className="bg-[#151515] p-2 rounded overflow-x-auto">
-{`fetch('https://api.tinybird.co/v0/pipes/your_pipe.json', {
+                {`fetch('https://api.tinybird.co/v0/pipes/your_pipe.json', {
   headers: {
     Authorization: 'Bearer ${token}'
   }
