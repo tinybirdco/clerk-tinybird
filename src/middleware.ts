@@ -1,30 +1,13 @@
-import { clerkMiddleware } from "@clerk/nextjs/server"
-import { NextResponse } from "next/server"
+import { clerkMiddleware } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server'
 
-export default clerkMiddleware(async (auth) => {
-  const authentication = await auth()
-  const { userId, sessionId, getToken } = authentication
+export default clerkMiddleware(async (/* auth */) => {
+  // Use the `getToken` method of the `auth` object parameter
+  // to retrieve the JWT token server-side with `template: "tinybird"`.
+  //
+  // Learn more: https://clerk.com/docs/backend-requests/jwt-templates
 
-  // If user is not authenticated, continue without modification
-  if (!userId || !sessionId) {
-    console.log('No user or session found')
-    const response = NextResponse.next()
-    response.headers.set('x-tinybird-token', process.env.NEXT_PUBLIC_TINYBIRD_API_KEY || '')
-    return response
-  }
-
-  const token = await getToken({ template: "tinybird" })
-
-  try {
-    const response = NextResponse.next()
-    response.headers.set('x-tinybird-token', token || '')
-    return response
-  } catch (error) {
-    console.error('Middleware error:', error)
-    const response = NextResponse.next()
-    response.headers.set('x-tinybird-token', process.env.NEXT_PUBLIC_TINYBIRD_API_KEY || '')
-    return response
-  }
+  return NextResponse.next()
 })
 
 export const config = {
