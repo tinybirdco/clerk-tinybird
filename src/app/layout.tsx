@@ -16,16 +16,16 @@ export default async function RootLayout({
   const token = headersList.get('x-tinybird-token') || ''
 
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        <ClerkProvider>
           <TinybirdProvider>
             <RootLayoutContent initialToken={token}>
               {children}
             </RootLayoutContent>
           </TinybirdProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   )
 } 
